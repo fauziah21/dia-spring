@@ -23,6 +23,8 @@ public class UserModel {
     private String userPhone;
     @Column(name = "user_address")
     private String userAddress;
+    @Column(name = "user_resume")
+    private String userResume;
 
     public int getUserId() {
         return userId;
@@ -80,6 +82,5 @@ public class UserModel {
         this.userResume = userResume;
     }
 
-    @Column(name = "user_resume")
-    private String userResume;
+
 }

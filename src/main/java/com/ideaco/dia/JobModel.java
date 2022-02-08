@@ -10,7 +10,7 @@ public class JobModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     //ini adalah nama kolom di mysql
     @Column(name = "job_id")
-    private int job_id;
+    private int jobId;
     @Column(name = "job_name")
     private String jobName;
     @Column(name = "job_desc")
@@ -18,12 +18,12 @@ public class JobModel {
     @Column(name = "job_salary")
     private int jobSalary;
 
-    public int getJob_id() {
-        return job_id;
+    public int getJobId() {
+        return jobId;
     }
 
-    public void setJob_id(int job_id) {
-        this.job_id = job_id;
+    public void setJobId(int jobId) {
+        this.jobId = jobId;
     }
 
     public String getJobName() {
