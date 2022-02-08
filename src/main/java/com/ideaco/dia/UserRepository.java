@@ -8,4 +8,7 @@ public interface UserRepository extends JpaRepository<UserModel, Integer> {
     //mencari data berdasarkan email
     Optional<UserModel> findByUserEmail(String userEmail);
 
+    //login
+    Optional<UserModel>findByUserEmailAndUserPassword(String userEmail, String userPassword);
+
 }

@@ -59,17 +59,13 @@ public class SecondService {
     }
 
     //login
-//    public String loginUser(String userEmail, String userPassword, String message){
-//        //validasi apakah useremail ada di table
-//        Optional<UserModel> userOptional = Optional.of(userRepository.findByUserEmail(userEmail).get());
-//        if(userOptional.isEmpty()){
-//            throw new UserRegistrationException("User with email "+userEmail+" doesn't exist");
-//        }
-//
-//        //validasi apakah password sama dengan yang di database
-//        Optional<UserModel> passOptional = Optional.of(userRepository.findByUserPassword(userPassword).get());
-//
-//
-//        return "success login";
-//    }
+    public UserModel getUserByEmailAndPassword(String userEmail, String userPassword){
+        Optional<UserModel> userOptional = userRepository.findByUserEmailAndUserPassword(userEmail, userPassword);
+
+        if (userOptional.isEmpty()){
+            return null;
+        }
+
+        return userOptional.get();
+    }
 }
