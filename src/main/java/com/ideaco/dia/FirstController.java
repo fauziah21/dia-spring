@@ -35,7 +35,12 @@ public class FirstController {
     //get data by name
     @GetMapping("/job/name/{jobName}")
     public JobModel getJobByName(@PathVariable("jobName") String jobName){
-        return firstService.getJobByName(jobName);
+        JobModel jobByName = firstService.getJobByName(jobName);
+        if (jobByName != null){
+            return jobByName;
+        }else{
+            return new JobModel();
+        }
     }
 
     //get data by salary greater than
@@ -54,6 +59,59 @@ public class FirstController {
                               @RequestParam("jobDesc") String jobDesc,
                               @RequestParam("jobSalary") int jobSalary){
         return firstService.createJob(jobName, jobDesc, jobSalary);
+    }
+
+    @PostMapping("/job/body")
+    public JobModel createJobWithBody(@RequestBody JobModel jobModel){
+        return firstService.createJobWithBody(jobModel);
+    }
+
+    @GetMapping("/job/name/salary")
+    public JobModel getJobByNameAndSalary(@RequestParam("jobName") String jobName,
+                                          @RequestParam("jobSalary") int jobSalary){
+        JobModel jobByName = firstService.getJobBySalaryAndName(jobName, jobSalary);
+        if (jobByName != null){
+            return jobByName;
+        }else{
+            return new JobModel();
+        }
+    }
+
+    @GetMapping("/job/search")
+    public List<JobModel> searchJob(@RequestParam("jobName") String jobName){
+        return firstService.searchJob(jobName);
+    }
+
+    @GetMapping("/job/filter")
+    public List<JobModel> filterJob(@RequestParam("jobSalary") int jobSalary){
+        return firstService.filterJob(jobSalary);
+    }
+
+    @PutMapping("/job/{jobId}")
+    public JobModel updateJob(@PathVariable("jobId") int jobId,
+                              @RequestBody JobModel jobModel){
+        JobModel updatedJob = firstService.updateJob(jobId, jobModel);
+        if (updatedJob != null){
+            return updatedJob;
+        }else{
+            return new JobModel();
+        }
+    }
+
+    @PatchMapping("/job/update")
+    public JobModel updateJobName(@RequestParam("jobId") int jobId,
+                                  @RequestParam("jobName") String jobName){
+        JobModel updatedJob = firstService.updateJobName(jobId, jobName);
+        if (updatedJob != null){
+            return updatedJob;
+        }else{
+            return new JobModel();
+        }
+    }
+
+    @DeleteMapping("/job/{jobId}")
+    public boolean deleteJob(@PathVariable("jobId") int jobId){
+        return firstService.deleteJob(jobId);
     }
 
 

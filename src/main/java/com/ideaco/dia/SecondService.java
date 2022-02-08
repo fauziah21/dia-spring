@@ -42,7 +42,7 @@ public class SecondService {
                                 String userAddress,
                                 String userResume){
         //validasi apakah data user alr exists
-        Optional<UserModel> userOptional = Optional.of(userRepository.findByUserEmail(userEmail).get());
+        Optional<UserModel> userOptional = userRepository.findByUserEmail(userEmail);
         if (userOptional.isPresent()){
             throw new UserRegistrationException("User with email "+userEmail+" already exists");
         }
@@ -57,4 +57,19 @@ public class SecondService {
 
         return userRepository.save(newUser);
     }
+
+    //login
+//    public String loginUser(String userEmail, String userPassword, String message){
+//        //validasi apakah useremail ada di table
+//        Optional<UserModel> userOptional = Optional.of(userRepository.findByUserEmail(userEmail).get());
+//        if(userOptional.isEmpty()){
+//            throw new UserRegistrationException("User with email "+userEmail+" doesn't exist");
+//        }
+//
+//        //validasi apakah password sama dengan yang di database
+//        Optional<UserModel> passOptional = Optional.of(userRepository.findByUserPassword(userPassword).get());
+//
+//
+//        return "success login";
+//    }
 }

@@ -1,6 +1,8 @@
 package com.ideaco.dia;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 import java.util.Optional;
@@ -12,4 +14,16 @@ public interface JobRepository extends JpaRepository<JobModel, Integer> {
 
     //mencari data berdasarkan salary
     List<JobModel> findByJobSalaryGreaterThan(int salary);
+
+    //dua parameter
+    Optional<JobModel> findByJobNameAndJobSalary(String jobName, int salary);
+
+    @Query(value = "select * from tab_job "+
+            "where job_name like %:jobName%", nativeQuery = true)
+    List<JobModel> searchJob(@Param("jobName") String jobName);
+
+    @Query(value = "select j from JobModel j "+
+            "where j.jobSalary >= :salary")
+    List<JobModel> filterJob(@Param("salary") int jobSalary);
+
 }

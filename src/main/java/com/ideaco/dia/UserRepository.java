@@ -7,4 +7,5 @@ import java.util.Optional;
 public interface UserRepository extends JpaRepository<UserModel, Integer> {
     //mencari data berdasarkan email
     Optional<UserModel> findByUserEmail(String userEmail);
+
 }
