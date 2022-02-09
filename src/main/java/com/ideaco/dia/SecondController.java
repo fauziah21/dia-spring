@@ -59,7 +59,6 @@ public class SecondController {
 
     //login
     @PostMapping("/user/email/password")
-    @ResponseBody
     public String getUserByEmailAndPassword(@RequestParam("userEmail") String userEmail,
                                             @RequestParam("userPassword") String userPassword){
         UserModel userByEmail = secondService.getUserByEmailAndPassword(userEmail, userPassword);
