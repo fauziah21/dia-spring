@@ -1,4 +1,4 @@
-package com.ideaco.dia;
+package com.ideaco.dia.model;
 
 import javax.persistence.*;
 

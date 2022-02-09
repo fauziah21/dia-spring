@@ -1,10 +1,14 @@
-package com.ideaco.dia;
+package com.ideaco.dia.service;
 
+import com.ideaco.dia.dto.JobDTO;
+import com.ideaco.dia.model.JobModel;
+import com.ideaco.dia.repository.JobRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class FirstService {
@@ -21,8 +25,16 @@ public class FirstService {
     }
 
     //fungsi untuk mengambil data job berdasarkan ID
-    public JobModel getJobById(int jobId ){
-        return jobRepository.findById(jobId).get();
+//    public JobModel getJobById(int jobId ){
+//        return jobRepository.findById(jobId).get();
+//    }
+
+    public JobDTO getJobById(int jobId){
+        return convertJob(jobRepository.findById(jobId).get());
+    }
+
+    private JobDTO convertJob(JobModel jobModel){
+        return new JobDTO(jobModel.getJobName(), jobModel.getJobSalary());
     }
 
     //mengambil data berdasarkan nama
@@ -39,15 +51,18 @@ public class FirstService {
         return jobRepository.findByJobSalaryGreaterThan(salary);
     }
 
-    public List<JobModel> findAllJobs(){
-        return jobRepository.findAll();
+    public List<JobDTO> findAllJobs(){
+        List<JobModel> jobModels = jobRepository.findAll();
+        return jobModels.stream().map(this::convertJob)
+                .collect(Collectors.toList());
     }
 
     public JobModel createJob(String jobName, String jobDesc, int jobSalary){
         //validasi apakah nama job alr exists
         JobModel newJob = new JobModel();
         newJob.setJobName(jobName);
-        newJob.setJobDesc(jobDesc);
+
+    newJob.setJobDesc(jobDesc);
         newJob.setJobSalary(jobSalary);
 
         return jobRepository.save(newJob);

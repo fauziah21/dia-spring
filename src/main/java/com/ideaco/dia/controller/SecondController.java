@@ -1,7 +1,10 @@
-package com.ideaco.dia;
+package com.ideaco.dia.controller;
 
+import com.ideaco.dia.service.SecondService;
+import com.ideaco.dia.model.UserModel;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @RestController
@@ -68,6 +71,14 @@ public class SecondController {
 //            return new UserModel();
             return "salah email / password";
         }
+    }
+
+    //login dengan response
+    @GetMapping("/user/login")
+    public void loginWithResponse(HttpServletResponse request, HttpServletResponse response,
+                                  @RequestParam("userEmail") String userEmail,
+                                  @RequestParam("userPassword") String userPassword){
+        userDTO
     }
 
 

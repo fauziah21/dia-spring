@@ -1,6 +1,10 @@
-package com.ideaco.dia;
+package com.ideaco.dia.service;
 
-import org.apache.catalina.User;
+import com.ideaco.dia.dto.JobDTO;
+import com.ideaco.dia.dto.UserDTO;
+import com.ideaco.dia.model.UserModel;
+import com.ideaco.dia.UserRegistrationException;
+import com.ideaco.dia.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -60,12 +64,16 @@ public class SecondService {
 
     //login
     public UserModel getUserByEmailAndPassword(String userEmail, String userPassword){
-        Optional<UserModel> userOptional = userRepository.findByUserEmailAndUserPassword(userEmail, userPassword);
+        Optional<UserModel> userOptional = (userRepository.findByUserEmailAndUserPassword(userEmail, userPassword);
 
         if (userOptional.isEmpty()){
             return null;
         }
 
         return userOptional.get();
+    }
+
+    private UserDTO convertUser(UserModel userModel){
+        return new UserDTO(userModel.getUserEmail(), userModel.getUserPassword());
     }
 }

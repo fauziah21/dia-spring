@@ -1,5 +1,6 @@
-package com.ideaco.dia;
+package com.ideaco.dia.repository;
 
+import com.ideaco.dia.model.JobModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

@@ -1,5 +1,6 @@
-package com.ideaco.dia;
+package com.ideaco.dia.repository;
 
+import com.ideaco.dia.model.UserModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
