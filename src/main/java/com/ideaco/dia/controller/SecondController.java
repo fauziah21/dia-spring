@@ -1,7 +1,10 @@
 package com.ideaco.dia.controller;
 
+import com.ideaco.dia.dto.UserDTO;
+import com.ideaco.dia.response.HandlerResponse;
 import com.ideaco.dia.service.SecondService;
 import com.ideaco.dia.model.UserModel;
+import org.apache.catalina.User;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
@@ -62,24 +65,12 @@ public class SecondController {
 
     //login
     @PostMapping("/user/email/password")
-    public String getUserByEmailAndPassword(@RequestParam("userEmail") String userEmail,
-                                            @RequestParam("userPassword") String userPassword){
-        UserModel userByEmail = secondService.getUserByEmailAndPassword(userEmail, userPassword);
-        if (userByEmail != null){
-            return "success login";
-        }else{
-//            return new UserModel();
-            return "salah email / password";
-        }
-    }
+    public void getUserByEmailAndPassword(HttpServletResponse request, HttpServletResponse response,
+                                          @RequestParam("userEmail") String userEmail,
+                                          @RequestParam("userPassword") String userPassword){
+        UserDTO userByEmail = secondService.getUserByEmailAndPassword(userEmail, userPassword);
 
-    //login dengan response
-    @GetMapping("/user/login")
-    public void loginWithResponse(HttpServletResponse request, HttpServletResponse response,
-                                  @RequestParam("userEmail") String userEmail,
-                                  @RequestParam("userPassword") String userPassword){
-        userDTO
+        HandlerResponse.responseSuccessOK(response, "success login");
     }
-
 
 }

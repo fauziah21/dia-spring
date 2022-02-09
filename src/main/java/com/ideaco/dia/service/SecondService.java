@@ -63,17 +63,15 @@ public class SecondService {
     }
 
     //login
-    public UserModel getUserByEmailAndPassword(String userEmail, String userPassword){
-        Optional<UserModel> userOptional = (userRepository.findByUserEmailAndUserPassword(userEmail, userPassword);
+    public UserDTO getUserByEmailAndPassword(String userEmail, String userPassword){
+        return convertUser(userRepository.findByUserEmailAndUserPassword(userEmail, userPassword).get());
 
-        if (userOptional.isEmpty()){
-            return null;
-        }
-
-        return userOptional.get();
     }
 
-    private UserDTO convertUser(UserModel userModel){
+    private UserDTO convertUser(UserModel userModel) {
+        //dengan constructor
         return new UserDTO(userModel.getUserEmail(), userModel.getUserPassword());
     }
+
+
 }
